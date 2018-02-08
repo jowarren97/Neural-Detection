@@ -2,6 +2,8 @@
 #include "Neuro_Sig.h"
 #include "math.h"
 
+/****** Constructors *****/
+
 Neuro_Sig::Neuro_Sig(int pin_in)
 {
   pinMode(pin_in, OUTPUT);
@@ -54,7 +56,7 @@ void Neuro_Sig::set_pin(int pin_in)
 	pinMode(pin_in, OUTPUT);
 }
 
-//------------------------------------------------------------------------
+/****** functions ******/
 
 void Neuro_Sig::append_buffer(float new_data)
 //adds new data in place of oldest (counter keeps track of index of oldest element)
@@ -84,7 +86,7 @@ bool Neuro_Sig::detect_spike()
 			return false;
 		}
 	}
-	
+	//cases where consecutive data wraps round ends of array
 	if (counter == 1)
 	{
 		if ((data_buffer[0] > threshold)&&(data_buffer[buffer_length-1] <= threshold))
@@ -98,7 +100,6 @@ bool Neuro_Sig::detect_spike()
 			//spike_train[counter] = 0;
 			return false;
 		}
-	}
 	if (counter == 0)
 	{
 		if ((data_buffer[buffer_length-1] > threshold)&&(data_buffer[buffer_length-2] <= threshold))
@@ -117,6 +118,7 @@ bool Neuro_Sig::detect_spike()
 
 void Neuro_Sig::get_bins()
 {
+//computes histogram of data buffer
 	float bin_width = (max - min)/no_bins;
 	float spike_count = 0;
 	
@@ -179,6 +181,7 @@ void Neuro_Sig::gaussian_smooth(float sigma, int numsteps)
 
 void Neuro_Sig::find_threshold()
 {
+//finds minimum point of histogram to get threshold
 	int i = no_bins/2;
 	int min_idx = 0;
 	
@@ -200,6 +203,7 @@ void Neuro_Sig::find_threshold()
 
 void Neuro_Sig::set_isi_rate()
 {
+//find inter-spike-interval rate
 	int current_time = millis();
 	isi_rate = 1000/(current_time - last_spike_time);
 	last_spike_time = current_time;
