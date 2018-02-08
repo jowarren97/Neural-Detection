@@ -12,8 +12,8 @@ class Neuro_Sig
 	solution but wanted your advice*/
 	
 	int counter; //counter represents where to input new data into data_buffer
-    int pin; //analog input pin for signal
-    int fs; //sampling frequency
+   	int pin; //analog input pin for signal
+    	int fs; //sampling frequency
 	float min; //min voltage value
 	float max; //max voltage value
 	float threshold; //threshold for spike detection
@@ -21,18 +21,18 @@ class Neuro_Sig
 	float isi_rate; //inter spike interval
 	float mean_rate; //over time 'float period' specified in function 'void set_mean_rate'
 	
-    float data_buffer[5000]; //buffer full of most recent data, used for threshold calculation
+    	float data_buffer[5000]; //buffer full of most recent data, used for threshold calculation
 	int spike_train[5000];
-    float bin_weight[1000]; //histogram of spike amplitudes
+    	float bin_weight[1000]; //histogram of spike amplitudes
 	const int buffer_length = sizeof(data_buffer)/sizeof(*data_buffer);
 	const int no_bins = sizeof(bin_weight)/sizeof(*bin_weight);	
 	
 	
   public:
-    Neuro_Sig(int pin_in);
-    Neuro_Sig(int pin_in, int fs_in);
-    Neuro_Sig(int pin_in, int fs_in, float min_in, float max_in);
-    ~Neuro_Sig();
+    	Neuro_Sig(int pin_in);
+    	Neuro_Sig(int pin_in, int fs_in);
+    	Neuro_Sig(int pin_in, int fs_in, float min_in, float max_in);
+    	~Neuro_Sig();
 	
 	
 	/*Q2: should i delete these functions for more simplicity or keep for more user control?*/
