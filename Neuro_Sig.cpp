@@ -57,7 +57,7 @@ void Neuro_Sig::set_pin(int pin_in)
 //------------------------------------------------------------------------
 
 void Neuro_Sig::append_buffer(float new_data)
-//
+//adds new data in place of oldest (counter keeps track of index of oldest element)
 {
 	data_buffer[counter] = new_data;
 	counter++;
